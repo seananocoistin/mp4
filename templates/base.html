@@ -9,16 +9,16 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <title>Acme Business Directory</title>
+        <title>The Premium Directory</title>
 </head>
     
-<body style="background: rgb(145,209,155);background: linear-gradient(0deg, rgba(145,209,155,1) 0%, rgba(242,246,241,1) 35%);min-height:100vh">
+<body style="background-color:lightyellow">
 
 
     <!-- Navbar -->
                 <nav class="navbar navbar-custom">
                     <div style="background-color:forestgreen;color: white; padding: 10px; font-size:20px;font-weight: bold;border-radius:5px">
-                        <a><strong>Acme Business Directory</strong></a>
+                        <a><strong>The Premium Directory</strong></a>
                     </div>
                 {% if status %}
                     <h4>Welcome {{status}}</h4>
@@ -60,7 +60,7 @@
         {% endblock %}
 
   <!-- Footer menu-->
-    <div class="footer-copyright text-center py-3" style="color:black;">Acme Business Directory © 2020</div>
+    <div class="footer-copyright text-center py-3" style="color:black;">The Premium Directory © 2020</div>
         <div class="footer-centered text-center py-3">
             <a href="{{ url_for('index') }}" style="color:black" class="active">Home</a>
             <a href="{{ url_for('about') }}" style="color:black">About</a>
