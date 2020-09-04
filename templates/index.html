@@ -20,17 +20,10 @@
 
 
 <div class="container">
-    <div class="col-xs-12">
-         <h1 style="text-align:center">Featured listings</h1>
-
-            <div id="myCarousel" class="carousel slide">
-                
-                <!-- Carousel items -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="row" style="justify-content: center">
+         <h1 style="text-align:center"></h1>
+         <div style="display:flex;width:900px;margin:0 auto;overflow:scroll;">
                         {% for task in tasks %}
-                            <div class="col-xs-3" style="background-color:white;color:black;padding:15px;text-align:left;border:3px solid whitesmoke;border-radius:3px;margin:3px;width:250px"><a href="#x"></a>
+                            <div style="background-color:white;color:black;padding:15px;text-align:left;border:3px solid whitesmoke;border-radius:3px;margin:3px;width:500px">
 								<h4><strong> {{task.business_name}}</strong></h4>
                                 <i class="fa fa-home" aria-hidden="true"></i>
                                 <br>
@@ -103,35 +96,28 @@
 							</div>
                             {% endfor %}
                         </div>
-                        <!--/row-->
-                    </div>
-                    <!--/item-->
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"></a>
-                            </div>
-                        </div>
-                        <!--/row-->
-                    </div>
-                    <!--/item-->
-                 </div>
-                <!--/carousel-inner--> <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+                <a href="#myCarousel" data-slide="prev">‹</a>
 
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                <a href="#myCarousel" data-slide="next">›</a>
             </div>
-            <!--/myCarousel-->
-    </div>
 </div>
 
 
 <div style="width:70%;margin:auto;">
     <h1 style="text-align:center">Choose a category</h1>
+</div>
+                <form action="/category" method="post">
+                    <input type="hidden" name="category" value="restaurant">
+                        <button type="submit" class="btn btn-warning" style="border-radius:5px;padding:7px">
+                            Restaurants
+                        </button>
+                </form>
+
+
+
+
+
+
 
     <!--Controls-->
       <div class="d-flex justify-content-center" style="padding:10px;">

@@ -146,3 +146,12 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
         port=int(os.environ.get('PORT')),
         debug=True)
+
+@app.route("/category", methods=["POST"])
+def category():
+    if request.method == "POST":
+        now = datetime.datetime.now().strftime("%H")
+        today = datetime.datetime.now().strftime("%w")
+        listings = mongo.db.listings.find({"category":request.form["category"]})
+        premium = mongo.db.premiumbd.find({"category":request.form["category"]})
+        return render_template("listings.html", tasks=listings, premium=premium, status=author, today=int(today), int=float, now=int(now))
