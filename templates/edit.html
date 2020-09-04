@@ -13,8 +13,23 @@
 <strong>ABOUT</strong>
 <form action='/editlisting' method='post' enctype="multipart/form-data">
   <div class="form-row">
-      <label for="inputName">What is the name of your business?</label>
+      <label>What is the name of your business?</label>
       <input type="text" required class="form-control" name="business_name" value="{{data.business_name}}">
+</div>
+
+<br>
+<div class="form-row">
+      <label>What type of business is it?</label>
+      <select required class="form-control" name="category">
+        <option value="accomdodation">Accomdodation</option>
+        <option value="restaurant">Restaurant</option>
+        <option value="education">Educational Services</option>
+        <option value="transport">Transport</option>
+        <option value="health">Health and Well-being</option>
+        <option value="retail">Retailing</option>
+        <option value="design">Design</option>
+        <option value="banking">Banking and Financial Services</option>
+      </select>
 </div>
 <br>
 <strong>LOCATION</strong>

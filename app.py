@@ -20,7 +20,7 @@ mongo = PyMongo(app)
 def index():
     now = datetime.datetime.now().strftime("%H")
     today = datetime.datetime.now().strftime("%w")
-    return render_template("index.html",tasks=mongo.db.listings.find(),status=author,today=int(today),int=float,now=int(now))
+    return render_template("index.html",tasks=mongo.db.premiumbd.find(),status=author,today=int(today),int=float,now=int(now))
 
 @app.route("/search", methods=["POST"])
 def search():
@@ -66,13 +66,17 @@ def contact():
 def listings():
     now = datetime.datetime.now().strftime("%H")
     today = datetime.datetime.now().strftime("%w")
-    return render_template("listings.html", tasks=mongo.db.listings.find(),status=author,today=int(today),int=float,now=int(now))
-
+    listings = mongo.db.listings.find()
+    premium = mongo.db.premiumbd.find()
+    return render_template("listings.html", tasks=listings, premium=premium, status=author, today=int(today),int=float,now=int(now))
+    
 @app.route("/mylisting")
 def mylisting():
     now = datetime.datetime.now().strftime("%H")
     today = datetime.datetime.now().strftime("%w")
-    return render_template("mylisting.html", tasks=mongo.db.listings.find({"author":author}),status=author,today=int(today),int=float,now=int(now))
+    listings = mongo.db.listings.find({"author":author})
+    premium = mongo.db.premiumbd.find({"author":author})
+    return render_template("mylisting.html", tasks=listings, premium=premium, status=author, today=int(today),int=float,now=int(now))
 
 @app.route("/deletelisting", methods=["POST"])
 def deletelisting():
@@ -113,7 +117,13 @@ def addlisting():
     if request.method == "POST":
         newlisting = request.form.to_dict()
         newlisting.update({"author":author})
-        mongo.db.listings.insert(newlisting)
+        if request.form.get("premium"):
+            """ Stripe logic here"""
+
+
+            mongo.db.premiumbd.insert(newlisting)
+        else:
+            mongo.db.listings.insert(newlisting)
         return mylisting()
 
 @app.route("/editlisting", methods=["POST"])

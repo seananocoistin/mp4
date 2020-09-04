@@ -19,161 +19,219 @@
 </div>
 
 
-<div style="display:flex;flex-wrap:wrap;justify-content:center">
 
-{% for task in tasks %}
-<div class="container" style="background-color:white;color:black;padding:30px;text-align:left;border:1px solid lightgray;border-radius:3px;margin:10px;width:300px">
-        <div class="form-group">
-           <h4><strong> {{task.business_name}}</strong></h4>
-        </div>
-        <div class="form-group">
-            <i class="fa fa-home" aria-hidden="true"></i>
-            <br>
-            {{task.address}}
-            <br>
-            {{task.address2}}
-            <br>
-            {{task.inputCity}}
-            <br>
-            {{task.inputCode}}
-            <br>
-            {{task.Country}} 
-        </div>
-        <div class="form-group">
-            <i class="fa fa-phone" aria-hidden="true"></i> {{task.telephone}}
-        </div>
-        <div class="form-group">
-            <i class="fa fa-laptop" aria-hidden="true"></i> {{task.website}}
-        </div>
-        <div class="form-group">
-            <i class="fa fa-envelope" aria-hidden="true"></i> {{task.email}}  
-        </div>
-        <div class="form-group">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <br>
-        {% for day in ["Monday-Friday","Saturday","Sunday","All days"] %}
-        {% if task[day] and task["endTime"+day]!="0.00" %}
-        {{day}}: {{task["startTime"+day]}}-{{task["endTime"+day]}}<br/>
-        {% endif %}
 
-        {% if day == "Monday-Friday" and today >0 and today<6 and task["Monday-Friday"] and task["endTime"+day]!="0.00" %}
 
-        {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
-            <div>
-            <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
-            </div>
-        {% else %}
-                <div>
-                <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
-                </div>
-        {% endif %}
-        {% elif day == "Saturday" and today == 6 and task["Saturday"] and task["endTime"+day]!="0.00" %}
-        {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
-            <div>
-            <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
-            </div>
-        {% else %}
-                <div>
-                <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
-                </div>
-        {% endif %}
-        {% elif day == "Sunday" and today == 0 and task["Sunday"] and task["endTime"+day]!="0.00" %}
-        {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
-            <div>
-            <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
-            </div>
-        {% else %}
-                <div>
-                <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
-                </div>
-        {% endif %}
-        {% elif day == "All days" and task["All days"] and task["endTime"+day]!="0.00" %}
-        {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
-            <div>
-            <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
-            </div>
-        {%else%}
-                <div>
-                <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
-                </div>
-        {%endif%}
-{%endif%}
-{%endfor%}
-</div>
-        <div class="form-group">
-            <p><strong>About</strong></p> {{task.about}}  
-        </div>
-</div>
-{% endfor %}
+<div style="width:70%;margin:auto;">
+    <h1 style="text-align:center">Featured listings</h1>
 
-</div>
+    <!--Controls-->
+      <div class="d-flex justify-content-center" style="padding:10px;">
+            <button type="button" href="#multi-item-example" data-slide="prev" class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button type="button" href="#multi-item-example" data-slide="next" class="btn btn-primary"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+      </div>
+    <!--/.Controls-->
 
-<div class="container">
-    <div class="col-xs-12">
-         <h1 style="text-align:center">Featured listings</h1>
+<!--Carousel Wrapper-->
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
 
-        <div class="well">
-            <div id="myCarousel" class="carousel slide">
-                
-                <!-- Carousel items -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="row">
-                            <div class="col-xs-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
-                            </div>
-                        </div>
-                        <!--/row-->
+<br>
+      <!--Indicators-->
+      <ol class="carousel-indicators">
+        <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+        <li data-target="#multi-item-example" data-slide-to="1"></li>
+        <li data-target="#multi-item-example" data-slide-to="2"></li>
+      </ol>
+      <!--/.Indicators-->
+
+      <!--Slides-->
+      <div class="carousel-inner" role="listbox">
+
+        <!--First slide-->
+        <div class="carousel-item active">
+        {% for task in tasks %}
+            <div class="col-md-4">
+                <div class="card mb-2" style="height:450px">
+                    <div class="card-body">
+                        <h4><strong> {{task.business_name}}</strong></h4>
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                    <br>
+                                            {{task.address}}
+                                            <br>
+                                            {{task.address2}}
+                                            <br>
+                                            {{task.inputCity}}
+                                            <br>
+                                            {{task.inputCode}}
+                                            <br>
+                                            {{task.Country}} 
+                                            <br>
+                                    <i class="fa fa-phone" aria-hidden="true"></i> {{task.telephone}}
+                                    <br>
+                                    <i class="fa fa-laptop" aria-hidden="true"></i> {{task.website}}
+                                    <br>
+                                    <i class="fa fa-envelope" aria-hidden="true"></i> {{task.email}}  
+                                    <br>
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    <br>
+                                    {% for day in ["Monday-Friday","Saturday","Sunday","All days"] %}
+                                                {% if task[day] and task["endTime"+day]!="0.00" %}
+                                                {{day}}: {{task["startTime"+day]}}-{{task["endTime"+day]}}<br/>
+                                                {% endif %}
+
+                                                {% if day == "Monday-Friday" and today >0 and today<6 and task["Monday-Friday"] and task["endTime"+day]!="0.00" %}
+
+                                                {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
+                                                    <div>
+                                                    <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
+                                                    </div>
+                                                {% else %}
+                                                        <div>
+                                                        <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
+                                                        </div>
+                                                {% endif %}
+                                                {% elif day == "Saturday" and today == 6 and task["Saturday"] and task["endTime"+day]!="0.00" %}
+                                                {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
+                                                <div>
+                                                    <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
+                                                </div>
+                                        {% else %}
+                                                <div>
+                                                    <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
+                                                </div>
+                                        {% endif %}
+                                        {% elif day == "Sunday" and today == 0 and task["Sunday"] and task["endTime"+day]!="0.00" %}
+                                        {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
+                                                <div>
+                                                    <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
+                                                </div>
+                                        {% else %}
+                                                <div>
+                                                    <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
+                                                </div>
+                                        {% endif %}
+                                        {% elif day == "All days" and task["All days"] and task["endTime"+day]!="0.00" %}
+                                        {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
+                                            <div>
+                                                <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
+                                            </div>
+                                        {%else%}
+                                                <div>
+                                                    <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
+                                                </div>
+                                        {%endif%}
+                                        {%endif%}
+                                        {%endfor%}
+                                        <p><strong>About</strong></p> {{task.about}}
                     </div>
-                    <!--/item-->
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                        </div>
-                        <!--/row-->
-                    </div>
-                    <!--/item-->
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-xs-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                        </div>
-                        <!--/row-->
-                    </div>
-                    <!--/item-->
                 </div>
-                <!--/carousel-inner--> 
-                
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="padding-top:10%;width:5%">‹</a>
-
-                <a class="right carousel-control" href="#myCarousel" data-slide="next" style="padding-top:10%;width:5%">›</a>
             </div>
-            <!--/myCarousel-->
+                {% endfor %}
         </div>
-        <!--/well-->
+
+        <!--/.First slide-->
+
+        <!--Second slide-->
+        <div class="carousel-item">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
+                  alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary">Button</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(47).jpg"
+                  alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary">Button</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(48).jpg"
+                  alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary">Button</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--/.Second slide-->
+
+        <!--Third slide-->
+        <div class="carousel-item">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(53).jpg"
+                  alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary">Button</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(45).jpg"
+                  alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary">Button</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(51).jpg"
+                  alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary">Button</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--/.Third slide-->
+
+      </div>
+      <!--/.Slides-->
+
     </div>
-</div>
+    <!--/.Carousel Wrapper-->
 
 </div>
-
 
 <script>
 $(document).ready(function() {

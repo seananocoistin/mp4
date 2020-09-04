@@ -1,6 +1,48 @@
 {% extends 'base.html' %} 
 {% block content %}
 
+<style>
+.premimuminfo {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.premimuminfo .premiumtext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.premimuminfo .premiumtext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.premimuminfo:hover .premiumtext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+
+
 <div class="container" style="width:600px;background-color:green;color:white;padding:20px;text-align:center">
     <h2 class="display-2">Add a listing</h2>
 </div>
@@ -14,6 +56,21 @@
       <label>What is the name of your business?</label>
       <input type="text" required class="form-control" name="business_name">
 </div>
+<br>
+<div class="form-row">
+      <label>What type of business is it?</label>
+      <select required class="form-control" name="category">
+        <option value="accomdodation">Accomdodation</option>
+        <option value="restaurant">Restaurant</option>
+        <option value="education">Educational Services</option>
+        <option value="transport">Transport</option>
+        <option value="health">Health and Well-being</option>
+        <option value="retail">Retailing</option>
+        <option value="design">Design</option>
+        <option value="banking">Banking and Financial Services</option>
+      </select>
+</div>
+
 <br>
 <strong>LOCATION</strong>
 <p>Where is your business located?</p>
@@ -83,10 +140,14 @@
       <textarea name="about" rows="5" cols="70"></textarea>
   </div>
 <br>
+
+<div class="premimuminfo">Make it a premium listing?
+<input type="checkbox" value="premium" name="premium"/>
+  <span class="premiumtext">A paid listing displayed on the home page and also at the beginning of search results.</span>
+</div>
+<br>
+<br>
 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Add this listing</button>
-</form>
-<form action="/stripe">
-    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-floppy-o" aria-hidden="true"></i> Make it a premium listing?</button>
 </form>
 </div>
 
