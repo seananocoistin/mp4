@@ -19,11 +19,119 @@
 </div>
 
 
+<div class="container">
+    <div class="col-xs-12">
+         <h1 style="text-align:center">Featured listings</h1>
 
+            <div id="myCarousel" class="carousel slide">
+                
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="row" style="justify-content: center">
+                        {% for task in tasks %}
+                            <div class="col-xs-3" style="background-color:white;color:black;padding:15px;text-align:left;border:3px solid whitesmoke;border-radius:3px;margin:3px;width:250px"><a href="#x"></a>
+								<h4><strong> {{task.business_name}}</strong></h4>
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                                <br>
+                                        {{task.address}}
+                                        <br>
+                                        {{task.address2}}
+                                        <br>
+                                        {{task.inputCity}}
+                                        <br>
+                                        {{task.inputCode}}
+                                        <br>
+                                        {{task.Country}} 
+                                        <br>
+                                        <br>
+                                <i class="fa fa-phone" aria-hidden="true"></i> {{task.telephone}}
+                                <br>
+                                <i class="fa fa-laptop" aria-hidden="true"></i> {{task.website}}
+                                <br>
+                                <i class="fa fa-envelope" aria-hidden="true"></i> {{task.email}}  
+                                <br>
+                                <br>
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                <br>
+                                {% for day in ["Monday-Friday","Saturday","Sunday","All days"] %}
+                                            {% if task[day] and task["endTime"+day]!="0.00" %}
+                                            {{day}}: {{task["startTime"+day]}}-{{task["endTime"+day]}}<br/>
+                                            {% endif %}
+                                            {% if day == "Monday-Friday" and today >0 and today<6 and task["Monday-Friday"] and task["endTime"+day]!="0.00" %}
+                                            {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}<span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
+                                            {% else %}
+                                                    <div>
+                                                    <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
+                                                    </div>
+                                            {% endif %}
+                                            <br>
+                                            {% elif day == "Saturday" and today == 6 and task["Saturday"] and task["endTime"+day]!="0.00" %}
+                                            {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
+                                            <div>
+                                                <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
+                                            </div>
+                                    {% else %}
+                                            <div>
+                                                <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
+                                            </div>
+                                    {% endif %}
+                                    {% elif day == "Sunday" and today == 0 and task["Sunday"] and task["endTime"+day]!="0.00" %}
+                                    {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
+                                            <div>
+                                                <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
+                                            </div>
+                                    {% else %}
+                                            <div>
+                                                <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
+                                            </div>
+                                    {% endif %}
+                                    {% elif day == "All days" and task["All days"] and task["endTime"+day]!="0.00" %}
+                                    {% if int(task["startTime"+day])<now and int(task["endTime"+day])>now %}
+                                        <div>
+                                            <span style="background-color:green;color:white;padding:5px;margin-top:15px;border-radius:5px;">Open</span>
+                                        </div>
+                                    {%else%}
+                                            <div>
+                                                <span style="background-color:red;color:white;padding:5px;border-radius:5px;">Closed now</span>
+                                            </div>
+                                    {%endif%}
+                                    {%endif%}
+                                    {%endfor%}
+                                    <br>
+                                    <p><strong>About</strong></p> {{task.about}}
+							</div>
+                            {% endfor %}
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <!--/item-->
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-xs-3"><a href="#x" class="thumbnail"></a>
+                            </div>
+                            <div class="col-xs-3"><a href="#x" class="thumbnail"></a>
+                            </div>
+                            <div class="col-xs-3"><a href="#x" class="thumbnail"></a>
+                            </div>
+                            <div class="col-xs-3"><a href="#x" class="thumbnail"></a>
+                            </div>
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <!--/item-->
+                 </div>
+                <!--/carousel-inner--> <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+            </div>
+            <!--/myCarousel-->
+    </div>
+</div>
 
 
 <div style="width:70%;margin:auto;">
-    <h1 style="text-align:center">Featured listings</h1>
+    <h1 style="text-align:center">Choose a category</h1>
 
     <!--Controls-->
       <div class="d-flex justify-content-center" style="padding:10px;">
